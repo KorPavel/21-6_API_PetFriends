@@ -1,0 +1,2 @@
+This file was created to test the negative test of adding a file other than a jpeg file.
+It is expected that in this scenario, the server will not be able to process this file and will issue a status code equal to 500.
