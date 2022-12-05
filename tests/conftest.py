@@ -30,22 +30,22 @@ def delete_test_pets(get_auth_key):
 
 
 """ Фикстура производит подсчёт времени выполнения каждого теста. 
-Результаты аккумулирует в файле Timebook.txt, а также выводит в 
+Результаты могут быть собраны в файле Timebook.txt, и/или выведены в 
 консоль после каждого теста """
 @pytest.fixture(autouse=True)
 def time_delta_teardown(request):
     # БЛОК SETUP
     # создаём блокнот для учёта времени
-    with open('Timebook.txt', 'a', encoding='utf8') as file:
-        file.write(f'* {request.node.name}\n')  # request.node.name - получаем имя запускааемого теста
+    # with open('Timebook.txt', 'a', encoding='utf8') as file:
+    #     file.write(f'* {request.node.name}\n')  # request.node.name - получаем имя запускаемого теста
     start_time = time.time_ns() # запускаем таймер
     yield
 
     # БЛОК TEARDOWN:
     end_time = time.time_ns() # останавливаем таймер
     res_time = (end_time - start_time) // 1000000
-    with open("Timebook.txt", 'a', encoding='utf8') as file:
-        file.write(f"> Время выполнения теста: {res_time / 1000} сек\n\n")
+    # with open("Timebook.txt", 'a', encoding='utf8') as file:
+    #     file.write(f"> Время выполнения теста: {res_time / 1000} сек\n\n")
     # Выводим результат в консоль:
     print(f"\n* {request.node.name}\n> Время выполнения теста: "
           f"{res_time}мс ({res_time / 1000}сек)")
